@@ -1,7 +1,13 @@
 // https://github.com/michael-ciniawsky/postcss-load-config
 
 module.exports = {
-  "plugins": {
-    "postcss-mpvue-wxss": {}
+    "plugins": {
+      "postcss-inline-svg": {
+          removeFill: false
+      },
+      "postcss-mpvue-wxss": {},
+      "postcss-pxtorpx": {},
+      "autoprefixer": {}
+    }
   }
-}
+  
