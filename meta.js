@@ -30,69 +30,35 @@ module.exports = {
       "type": "string",
       "message": "Author"
     },
-    "build": {
-      "type": "list",
-      "message": "Vue build",
-      "choices": [
-        // {
-        //   "name": "Runtime + Compiler: recommended for most users",
-        //   "value": "standalone",
-        //   "short": "standalone"
-        // },
-        {
-          "name": "Runtime-only: no custom render function, only can compile template in *.vue",
-          "value": "runtime",
-          "short": "runtime"
-        }
-      ]
-    },
-    "vuex": {
-      "type": "confirm",
-      "message": "Use Vuex?"
-    },
+    // "build": {
+    //   "type": "list",
+    //   "message": "Vue build",
+    //   "choices": [
+    //     // {
+    //     //   "name": "Runtime + Compiler: recommended for most users",
+    //     //   "value": "standalone",
+    //     //   "short": "standalone"
+    //     // },
+    //     {
+    //       "name": "Runtime-only: no custom render function, only can compile template in *.vue",
+    //       "value": "runtime",
+    //       "short": "runtime"
+    //     }
+    //   ]
+    // },
     "lint": {
       "type": "confirm",
       "message": "Use ESLint to lint your code?"
     },
-    "lintConfig": {
-      "when": "lint",
-      "type": "list",
-      "message": "Pick an ESLint preset",
-      "choices": [
-        {
-          "name": "Standard (https://github.com/feross/standard)",
-          "value": "standard",
-          "short": "Standard"
-        },
-        {
-          "name": "Airbnb (https://github.com/airbnb/javascript)",
-          "value": "airbnb",
-          "short": "Airbnb"
-        },
-        {
-          "name": "none (configure it yourself)",
-          "value": "none",
-          "short": "none"
-        }
-      ]
-    },
     "test": {
-      "value": false,
-      "message": "小程序测试，敬请关注最新微信开发者工具的“测试报告”功能"
+      "type": "confirm",
+      "message": "Use Jest to check your code?"
     }
   },
   "filters": {
     ".eslintrc.js": "lint",
     ".eslintignore": "lint",
-    // "config/test.env.js": "unit || e2e",
-    // "test/unit/**/*": "unit",
-    // "build/webpack.test.conf.js": "unit",
-    // "test/e2e/**/*": "e2e"
-    "config/test.env.js": "test",
-    "test/unit/**/*": "test",
-    "build/webpack.test.conf.js": "test",
-    "test/e2e/**/*": "test",
-    "src/pages/counter/*": "vuex",
+    "test/**/*": "test"
   },
   // "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
   "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at http://mpvue.com"

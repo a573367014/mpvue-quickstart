@@ -1,12 +1,21 @@
-{{#if_eq build "standalone"}}
-// The Vue build version to load with the `import` command
-// mpvue has been set in webpack.base.conf with an alias.
-{{/if_eq}}
-import Vue from 'vue'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-import App from './App'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+import './assets/style/index.less';
+import Vue from 'vue';
+import App from './App';
+import sensors from '@/services/sensors/sensorsdata';
+import store from '@/vuex/store';
+// 小程序不支持cookie、引入插件支持
+import 'weapp-cookie';
 
-Vue.config.productionTip = false{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-App.mpType = 'app'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+import Icon from './components/icon.vue';
 
-const app = new Vue(App){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-app.$mount(){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+Vue.component('MyIcon', Icon);
+Vue.config.productionTip = false;
+App.mpType = 'app';
+
+const app = new Vue({
+    store,
+    ...App
+});
+// 初始化神策埋点
+sensors.init();
+app.$mount();
