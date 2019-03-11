@@ -6,7 +6,6 @@
   "author": "{{ author }}",
   "private": true,
   "scripts": {
-    "test": "jest --coverage",
     "dev:wx": "node build/dev-server.js wx",
     "build:wx": "node build/build.js wx",
     "dev:swan": "node build/dev-server.js swan",
@@ -21,10 +20,8 @@
     "release:wx": "node scripts/release.js wx",
     "dev": "npm run dev:wx",
     "build": "npm run build:wx",
-    "release": "node scripts/release.js wx"{{#unit}},
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run"{{/unit}}{{#e2e}},
-    "e2e": "node test/e2e/runner.js"{{/e2e}}{{#if_or unit e2e}},
-    "test": "{{#unit}}npm run unit{{/unit}}{{#unit}}{{#e2e}} && {{/e2e}}{{/unit}}{{#e2e}}npm run e2e{{/e2e}}"{{/if_or}}{{#lint}},
+    "release": "node scripts/release.js wx"{{#unit}},{{#unit}}
+    "test": "jest --coverage",{{/unit}},{{#lint}}
     "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}"{{/lint}}
   },
   "dependencies": {
