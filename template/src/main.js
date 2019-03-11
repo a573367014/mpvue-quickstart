@@ -4,7 +4,7 @@ import App from './App';
 import sensors from '@/services/sensors/sensorsdata';
 import store from '@/vuex/store';
 // 小程序不支持cookie、引入插件支持
-import 'weapp-cookie';
+// import 'weapp-cookie';
 
 import Icon from './components/icon.vue';
 

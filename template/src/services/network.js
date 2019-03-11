@@ -1,5 +1,5 @@
 import axios from 'axios';
-import mpAdapter from 'axios-miniprogram-adapter';
+import mpAdapter from './axios-adapter';
 import store from '@/vuex/store';
 
 import { API_URL, DEBUG } from '@/config';

@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "axios-miniprogram-adapter": "^0.2.2",
     "path-to-regexp": "^3.0.0",
     "mpvue": "^2.0.0",
     "weapp-cookie": "^1.2.9",

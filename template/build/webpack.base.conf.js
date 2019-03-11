@@ -91,12 +91,6 @@ let baseWebpackConfig = {
                     {
                         loader: 'mpvue-loader',
                         options: Object.assign({ checkMPEntry: true }, vueLoaderConfig)
-                    }, {
-                        loader: path.resolve(__dirname, './platform-loader.js'),
-                        options: {
-                            keep: process.env.PLATFORM || 'wx',
-                            tags: ['wx', 'my', 'tt', 'swan']
-                        }
                     }
                 ]
             },
@@ -146,7 +140,7 @@ let baseWebpackConfig = {
         // api 统一桥协议方案
         new webpack.DefinePlugin({
             'mpvue': 'global.mpvue',
-            'mpvuePlatform': 'global.mpvuePlatform'
+            'mpvuePlatform': JSON.stringify(process.env.PLATFORM || 'wx')
         }),
         new MpvuePlugin(),
         new CopyWebpackPlugin([
