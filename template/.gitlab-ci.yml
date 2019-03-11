@@ -1,0 +1,26 @@
+stages:
+  - build
+  # - test
+  # deploy
+
+cache:
+  # untracked: true
+  # key: x-video
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - .ci-task-runner-cache.json
+    - .uglify-js-cache
+    - node_modules
+    - dist*
+
+build:
+  stage: build
+  variables:
+    APP_STAGE: production
+  only:
+    - master
+    - dev
+  script:
+    - npm run release
+  tags:
+    - hlg-ci-front
