@@ -37,7 +37,7 @@ function getRequest () {
     switch (true) {
     case typeof wx === 'object':
         platFormName = 'wechat';
-        return wx.request.bind(wx);
+        return mpvue.request.bind(wx);
     case typeof swan === 'object':
         platFormName = 'baidu';
         return swan.request.bind(swan);
@@ -45,7 +45,7 @@ function getRequest () {
         platFormName = 'alipay';
         return my.httpRequest.bind(my);
     default:
-        return wx.request.bind(wx);
+        return mpvue.request.bind(wx);
     }
 }
 /**

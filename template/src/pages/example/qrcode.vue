@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import qrcodeModel from '@/models/qrcode';
-
 export default {
     data () {
         return {
@@ -14,10 +12,6 @@ export default {
         };
     },
     mounted () {
-        qrcodeModel().then(res => {
-            console.log(res);
-            this.src = res;
-        }).catch(console.error);
     }
 };
 </script>

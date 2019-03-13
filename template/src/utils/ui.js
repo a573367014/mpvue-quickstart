@@ -5,7 +5,7 @@ export default {
      * @param {String} msg 提示信息
      */
     showToast (msg, timeout = 1500) {
-        wx.showToast({
+        mpvue.showToast({
             title: msg,
             icon: 'none',
             duration: timeout
@@ -16,7 +16,7 @@ export default {
      * 隐藏消息提示框
      */
     hideToast () {
-        wx.hideToast();
+        mpvue.hideToast();
     },
 
     /**
@@ -25,7 +25,7 @@ export default {
      * @param {String} msg 提示信息
      */
     showLoading (msg) {
-        wx.showLoading({
+        mpvue.showLoading({
             title: msg || '加载中...',
             mask: true
         });
@@ -35,6 +35,6 @@ export default {
      * 关闭 loading 提示框
      */
     hideLoading () {
-        wx.hideLoading();
+        mpvue.hideLoading();
     }
 };

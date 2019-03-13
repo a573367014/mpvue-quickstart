@@ -55,7 +55,7 @@ const logger = {
         const url = routes[routes.length - 1].route;
         Log().add({
             page_url: url,
-            message: `${'{{projectName}}'.toUpperCase()}_MINIPEOGRAM_LOG: ${err.stack || err.message || err.errMsg}`,
+            message: `${''.toUpperCase()}_MINIPEOGRAM_LOG: ${err.stack || err.message || err.errMsg}`,
             column_no: err.columnNo || -1,
             line_no: err.lineNo || -1,
             js_url: err.url

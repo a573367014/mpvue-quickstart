@@ -24,7 +24,7 @@ const uploadImage = (tempUrl) => {
             OSSAccessKeyId: token.access_key_id,
             OSSUploadAction: upload.bucket_domain
         };
-        return promiseify(wx.uploadFile, {
+        return promiseify(mpvue.uploadFile, {
             url: IMAGE_HOST,
             filePath: tempUrl,
             name: 'file',

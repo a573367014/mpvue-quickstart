@@ -9,7 +9,7 @@
                 <view v-for="item in list"
                      :key="item"
                      style="line-height: 50px">
-                    \{{labelMap[item]}}“\{{item}}”
+                    {{labelMap[item]}}“{{item}}”
                 </view>
             </picker-view-column>
         </picker-view>
@@ -41,7 +41,7 @@ export default {
             this.curValue = e.mp.detail.value[0];
         },
         onNavigate () {
-            wx.navigateTo({
+            mpvue.navigateTo({
                 url: '/pages/example' + this.list[this.curValue].split('.')[1]
             });
         }

@@ -9,7 +9,7 @@
                 <canvas canvas-id="canvas" id="canvas" class="u-ps-full"></canvas>
                 <image class="c-process-loading__image" :src="img.process" />
             </div>
-            <div class="c-process-loading__text">{{text}}</div>
+            <div class="c-process-loading__text"></div>
             <div class="c-process-loading__close" @click="$emit('cancel')">取消</div>
         </div>
     </div>
@@ -17,7 +17,7 @@
 
 <script>
 import {DEBUG} from '@/config';
-const {windowWidth} = wx.getSystemInfoSync();
+const {windowWidth} = mpvue.getSystemInfoSync();
 
 export default {
     props: {
@@ -101,7 +101,7 @@ export default {
 
         drawCircle (value = 0) {
             const borderWidth = 3;
-            const ctx = this.ctx || wx.createCanvasContext('canvas');
+            const ctx = this.ctx || mpvue.createCanvasContext('canvas');
             const w = parseInt((156 / 750 * windowWidth) / 2);
             const h = parseInt((156 / 750 * windowWidth) / 2);
 
@@ -136,7 +136,7 @@ export default {
             this.value = 0;
 
             if (v) {
-                this.ctx = wx.createCanvasContext('canvas');
+                this.ctx = mpvue.createCanvasContext('canvas');
 
                 this.drawCircle(0);
                 this.auto && this.start();

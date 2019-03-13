@@ -10,7 +10,7 @@ let bigVersion;
 let subVersion;
 
 // 平台判断
-info = wx.getSystemInfoSync();
+info = mpvue.getSystemInfoSync();
 app = getApp();
 
 // 版本号

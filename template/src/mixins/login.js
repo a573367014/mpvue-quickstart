@@ -6,8 +6,8 @@ export default {
     methods: {
         async _getUserInfo () {
             try {
-                const { code } = await promiseify(wx.login);
-                const { encryptedData, iv, userInfo } = await promiseify(wx.getUserInfo);
+                const { code } = await promiseify(mpvue.login);
+                const { encryptedData, iv, userInfo } = await promiseify(mpvue.getUserInfo);
 
                 return {
                     code,

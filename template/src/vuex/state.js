@@ -1,4 +1,4 @@
-const info = wx.getSystemInfoSync();
+const info = mpvue.getSystemInfoSync();
 const state = {
     userInfo: {},
     loginToken: '',

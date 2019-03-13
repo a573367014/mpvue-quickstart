@@ -1,18 +1,18 @@
 export default {
     set (key, value) {
-        wx.setStorageSync(key, value);
+        mpvue.setStorageSync(key, value);
     },
     get (key) {
-        return wx.getStorageSync(key);
+        return mpvue.getStorageSync(key);
     },
     getInfo () {
-        return wx.getStorageInfoSync();
+        return mpvue.getStorageInfoSync();
     },
     remove (key) {
-        wx.removeStorageSync(key);
+        mpvue.removeStorageSync(key);
     },
     clear () {
-        wx.clearStorageSync();
+        mpvue.clearStorageSync();
     }
 }
 ;

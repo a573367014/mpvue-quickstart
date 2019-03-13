@@ -6,7 +6,7 @@ export default {
      */
     getClientBoundingRect (selector) {
         let method = selector.indexOf('#') > -1 ? 'select' : 'selectAll';
-        let query = wx.createSelectorQuery();
+        let query = mpvue.createSelectorQuery();
         return new Promise((resolve) => {
             query[method](selector).boundingClientRect();
             query.exec(res => {

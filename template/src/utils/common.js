@@ -1,4 +1,4 @@
-const systemInfo = wx.getSystemInfoSync();
+const systemInfo = mpvue.getSystemInfoSync();
 
 /**
  * 微信异步接口转promise

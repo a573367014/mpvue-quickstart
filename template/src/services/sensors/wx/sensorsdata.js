@@ -712,7 +712,7 @@ _.info = {
         var that = this;
 
         function getNetwork () {
-            wx.getNetworkType({
+            mpvue.getNetworkType({
                 'success': function (t) {
                     e.$network_type = t['networkType'];
                 },
@@ -721,7 +721,7 @@ _.info = {
         }
 
         function getSystemInfo () {
-            wx.getSystemInfo({
+            mpvue.getSystemInfo({
                 'success': function (t) {
                     e.$model = t['model'];
                     e.$screen_width = Number(t['windowWidth']);
@@ -798,7 +798,7 @@ sa.store = {
         if (this.storageInfo) {
             return this.storageInfo;
         } else {
-            this.storageInfo = wx.getStorageSync('sensorsdata2015_wechat') || '';
+            this.storageInfo = mpvue.getStorageSync('sensorsdata2015_wechat') || '';
             return this.storageInfo;
         }
     },
@@ -858,7 +858,7 @@ sa.store = {
         this._state[name] = value;
     },
     save: function () {
-        wx.setStorageSync('sensorsdata2015_wechat', this._state);
+        mpvue.setStorageSync('sensorsdata2015_wechat', this._state);
     },
     init: function () {
         var info = this.getStorage();
@@ -968,10 +968,10 @@ sa.login = function (id) {
 // 获取openid，先从storage里获取，
 sa.openid = {
     getRequest: function (callback) {
-        wx.login({
+        mpvue.login({
             success: function (res) {
                 if (res.code && sa.para.appid && sa.para.openid_url) {
-                    wx.request({
+                    mpvue.request({
                         url: sa.para.openid_url + '&code=' + res.code + '&appid=' + sa.para.appid,
                         method: 'GET',
                         complete: function (res2) {
@@ -1082,7 +1082,7 @@ sa.requestQueue.prototype.start = function () {
     setTimeout(function () {
         me.isEnd();
     }, 300);
-    wx.request({
+    mpvue.request({
         url: this.url,
         method: 'GET',
         complete: function () {

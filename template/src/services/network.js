@@ -1,5 +1,5 @@
 import axios from 'axios';
-import mpAdapter from './axios-adapter';
+import mpAdapter from './axiosAdapter';
 import store from '@/vuex/store';
 
 import { API_URL, DEBUG } from '@/config';
@@ -28,7 +28,7 @@ http.interceptors.response.use(
         if (res.status === 401) {
             store.dispatch('clearLogin');
             return Promise.reject(res);
-        } else if (res.status !== 200) {
+        } else if (res.status.toString().indexOf('20') !== 0) {
             setTimeout(() => {
                 !res._isPreventDefault &&
                 res.data &&
