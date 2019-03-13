@@ -219,7 +219,7 @@ function processApis (taro) {
                     }
                 });
 
-                if (newKey === 'uploadFile' || newKey === 'downloadFile') {
+                if (key === 'uploadFile' || key === 'downloadFile' || key === 'request') {
                     p.progress = cb => {
                         if (task) {
                             task.onProgressUpdate(cb);

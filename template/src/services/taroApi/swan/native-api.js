@@ -7,23 +7,24 @@ import {
 
 function processApis (taro) {
     const weApis = Object.assign({ }, onAndSyncApis, noPromiseApis, otherApis);
-
     Object.keys(weApis).forEach(key => {
-        if (
-            !onAndSyncApis[key] &&
-            !noPromiseApis[key]
-        ) {
+        if (!(key in swan)) {
+            taro[key] = () => {
+                console.warn(`百度小程序暂不支持 ${key}`);
+            };
+            return;
+        }
+        if (!onAndSyncApis[key] && !noPromiseApis[key]) {
             taro[key] = (options, ...args) => {
                 options = options || {};
                 let task = null;
                 let obj = Object.assign({}, options);
                 if (typeof options === 'string') {
                     if (args.length) {
-                        return wx[key](options, ...args);
+                        return swan[key](options, ...args);
                     }
-                    return wx[key](options);
+                    return swan[key](options);
                 }
-
                 const p = new Promise((resolve, reject) => {
                     ['fail', 'success', 'complete'].forEach((k) => {
                         obj[k] = (res) => {
@@ -41,11 +42,10 @@ function processApis (taro) {
                             }
                         };
                     });
-
                     if (args.length) {
-                        task = wx[key](obj, ...args);
+                        task = swan[key](obj, ...args);
                     } else {
-                        task = wx[key](obj);
+                        task = swan[key](obj);
                     }
                 });
                 if (key === 'uploadFile' || key === 'downloadFile' || key === 'request') {
@@ -73,7 +73,7 @@ function processApis (taro) {
                 if (lastArg && lastArg.isTaroComponent && lastArg.$scope) {
                     newArgs.splice(argsLen - 1, 1, lastArg.$scope);
                 }
-                return wx[key].apply(wx, newArgs);
+                return swan[key].apply(swan, newArgs);
             };
         }
     });
@@ -87,21 +87,10 @@ function pxTransform (size) {
     return parseInt(size, 10) / deviceRatio[designWidth] + 'rpx';
 }
 
-function canIUseWebp () {
-    const { platform } = mpvue.getSystemInfoSync();
-    const platformLower = platform.toLowerCase();
-    if (platformLower === 'android' || platformLower === 'devtools') {
-        return true;
-    }
-    return false;
-}
-
 export default function initNativeApi (taro) {
     processApis(taro);
     taro.getCurrentPages = getCurrentPages;
     taro.getApp = getApp;
-    taro.requirePlugin = requirePlugin;
     taro.initPxTransform = initPxTransform.bind(taro);
     taro.pxTransform = pxTransform.bind(taro);
-    taro.canIUseWebp = canIUseWebp;
 }

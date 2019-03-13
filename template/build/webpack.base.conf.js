@@ -35,6 +35,7 @@ let baseWebpackConfig = {
         extensions: ['.js', '.vue', '.json'],
         alias: {
             vue: 'mpvue',
+            axios: resolve('src/services/axios'),
             '@': resolve('src')
         },
         symlinks: false,

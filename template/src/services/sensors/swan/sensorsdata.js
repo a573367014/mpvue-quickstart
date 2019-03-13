@@ -2,8 +2,7 @@
  * @fileoverview sensors analytic miniprogram sdk
  * @author shengyonggen@sensorsdata.cn
  */
-import conf from './sensorsdata_conf.js';
-
+var conf = require('./sensorsdata_conf.js');
 var sa = {};
 var _ = {};
 
@@ -20,8 +19,8 @@ var ArrayProto = Array.prototype,
     slice = ArrayProto.slice,
     toString = ObjProto.toString,
     hasOwnProperty = ObjProto.hasOwnProperty,
-    LIB_VERSION = '0.2',
-    LIB_NAME = 'AlipayMini';
+    LIB_VERSION = '0.1',
+    LIB_NAME = 'SmartProgram';
 
 var source_channel_standard = 'utm_source utm_medium utm_campaign utm_content utm_term';
 
@@ -441,24 +440,23 @@ _.info = {
     properties: {
         $lib: LIB_NAME,
         $lib_version: String(LIB_VERSION),
-        $user_agent: 'SensorsAnalytics AlipayMini SDK'
+        $user_agent: 'SensorsAnalytics SmartProgram SDK'
     },
     getSystem: function () {
         var e = this.properties;
         var that = this;
-        // 小程序bug，某些版本没有complete参数。
         var systemNotCalled = true;
 
         function getSystemInfo () {
             if (systemNotCalled) {
                 systemNotCalled = true;
-                my.getSystemInfo({
+                swan.getSystemInfo({
                     success: function (t) {
                         e.$model = t['model'];
                         e.$screen_width = Number(t['screenWidth']);
                         e.$screen_height = Number(t['screenHeight']);
                         e.$os = t['platform'];
-                        // e.$os_version = t["version"];
+                        e.$os_version = t['system'].split(' ')[1];
                         e.$manufacturer = t['brand'];
                         that.setStatusComplete();
                     },
@@ -468,7 +466,7 @@ _.info = {
         }
 
         function getNetwork () {
-            my.getNetworkType({
+            swan.getNetworkType({
                 success: function (t) {
                     e.$network_type = t['networkType'];
                     getSystemInfo();
@@ -551,7 +549,7 @@ sa.store = {
 
     },
     getStorage: function () {
-        return my.getStorageSync({key: 'sensorsdata2015_zfb'}) || {};
+        return swan.getStorageSync('sensorsdata2015_baidu') || '';
     },
     _state: {},
     toState: function (state) {
@@ -600,13 +598,10 @@ sa.store = {
         this._state[name] = value;
     },
     save: function () {
-        my.setStorageSync({
-            key: 'sensorsdata2015_zfb',
-            data: this._state
-        });
+        swan.setStorageSync('sensorsdata2015_baidu', this._state);
     },
     init: function () {
-        var info = this.getStorage().data;
+        var info = this.getStorage();
         if (info) {
             this.toState(info);
         } else {
@@ -684,14 +679,13 @@ sa.registerApp = function (obj) {
         _.info.currentProps = _.extend(_.info.currentProps, obj);
     }
 };
-
 /*
 sa.register = function (obj) {
   if (_.isObject(obj) && !_.isEmptyObject(obj)) {
     sa.store.setProps(obj);
   }
-}; */
-
+};
+*/
 sa.clearAllRegister = function () {
     sa.store.setProps({}, true);
 };
@@ -733,7 +727,7 @@ sa.send = function (t) {
     }
 
     var sendRequest = function () {
-        my.httpRequest({
+        swan.request({
             'url': url,
             'method': 'GET'
         });
@@ -743,4 +737,4 @@ sa.send = function (t) {
 
 sa.init();
 
-export default sa;
+module.exports = sa;

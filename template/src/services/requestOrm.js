@@ -26,8 +26,9 @@ export default class OrmRequest {
                 // 添加分页信息
                 return this.select(data, config).then(res => {
                     try {
-                        res.pagination = JSON.parse(getHeader(res.headers, 'x-pagination'));
+                        res.pagination = JSON.parse(getHeader(res.header || res.headers, 'x-pagination'));
                     } catch (e) {
+                        console.log(e);
                         res.pagination = null;
                     }
                     return res;

@@ -1,11 +1,8 @@
 import axios from 'axios';
-import mpAdapter from './axiosAdapter';
 import store from '@/vuex/store';
 
 import { API_URL, DEBUG } from '@/config';
-import { promiseify } from '@/utils';
 
-axios.defaults.adapter = mpAdapter;
 const http = axios.create({
     // 注意：API_URL 最后一个字符得是 "/"
     baseURL: API_URL + 'api/',
@@ -23,7 +20,7 @@ http.interceptors.response.use(
         res.preventDefault = () => {
             res._isPreventDefault = true;
         };
-
+        console.log(res);
         // 未登录或登录态失效
         if (res.status === 401) {
             store.dispatch('clearLogin');
@@ -33,7 +30,7 @@ http.interceptors.response.use(
                 !res._isPreventDefault &&
                 res.data &&
                 res.data.message &&
-                wx.showToast({
+                mpvue.showToast({
                     duration: 2500,
                     title: res.data.message,
                     icon: 'none'
@@ -53,7 +50,7 @@ http.interceptors.response.use(
         };
 
         if (err.errMsg !== 'request:fail abort') {
-            const { networkType } = await promiseify(wx.getNetworkType);
+            const { networkType } = await mpvue.getNetworkType();
             const isTimeout = (msg) => msg.indexOf('time') !== -1;
             const isNetworkError = networkType === 'none';
 
@@ -66,7 +63,7 @@ http.interceptors.response.use(
                     msg = '网络连接中断, 请检查网络';
                 };
 
-                !err._isPreventDefault && wx.showToast({
+                !err._isPreventDefault && mpvue.showToast({
                     duration: 2500,
                     title: msg,
                     icon: 'none'

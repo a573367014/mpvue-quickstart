@@ -25,7 +25,7 @@
     "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}"{{/lint}}
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "@gaoding/miniprogram-logger": "^0.1.4",
     "path-to-regexp": "^3.0.0",
     "mpvue": "^2.0.0",
     "weapp-cookie": "^1.2.9",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.29",
+    "@gaoding/node-logger": "^0.1.2",
     "ali-oss": "^5.3.1",
     "babel-core": "^6.22.1",
     "babel-loader": "^7.1.1",

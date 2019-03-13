@@ -2,68 +2,27 @@
  * logger
  * 线上log查看：https://elk.hlgdata.com
  */
+import { logger } from '@gaoding/miniprogram-logger';
 
-import Log from '@/models/logs';
+// 在项目入口初始化
+logger.init('testname', {
+    isDebug: true,
+    user: {id: 0}
+});
 
-const logger = {
-    info (...args) {
-        console.log(...args);
-    },
-    error (...args) {
-        console.error(...args);
-
-        this.postError(args[0]);
-    },
-    postError (err) {
-        // ignore debug or canceled
-        if (
-            !err ||
-            err.name === 'CancellationError' ||
-            err.canceled
-        ) {
-            return;
-        }
-
-        if (!(err instanceof Error)) {
-            if (String(err).toLowerCase() === '[object event]') {
-                const logInfo = {};
-
-                for (let field in err) {
-                    const item = err[field];
-                    let subItem;
-
-                    // 只递归一层
-                    if (item instanceof Object) {
-                        subItem = {};
-                        for (let subField in item) {
-                            subItem[subField] = item[subField] instanceof Object ? '[object]' : item[subField];
-                        }
-                    } else {
-                        subItem = item;
-                    }
-
-                    logInfo[field] = subItem;
-                }
-
-                err = JSON.stringify('Uncatched Event ' + logInfo);
-            }
-
-            err = new Error(err);
-        }
-
-        const routes = getCurrentPages();
-        const url = routes[routes.length - 1].route;
-        Log().add({
-            page_url: url,
-            message: `${''.toUpperCase()}_MINIPEOGRAM_LOG: ${err.stack || err.message || err.errMsg}`,
-            column_no: err.columnNo || -1,
-            line_no: err.lineNo || -1,
-            js_url: err.url
-        })
-            .catch(err => {
-                console.error(err);
-            });
-    }
+logger.sendRequest = function (url, data) {
+    mpvue.request({
+        url: url,
+        data: data
+    });
 };
+
+// logger.error('发送一个错误日志');
+// logger.error(new Error('发送一个错误日志'));
+
+// logger.info('发送一个消息日志');
+
+// 修改用户id
+// logger.setUser({id: '45667'});
 
 export default logger;

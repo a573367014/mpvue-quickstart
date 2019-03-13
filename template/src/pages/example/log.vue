@@ -71,7 +71,7 @@ export default {
             try {
                 throw new Error('test');
             } catch (e) {
-                await Log.error('test error log', e);
+                await Log.error(new Error('test error log'));
                 ui.showToast('上传成功');
             }
         }

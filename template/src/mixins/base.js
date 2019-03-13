@@ -118,10 +118,4 @@ export default {
             }
         }
     }
-    // onShareAppMessage () {
-    //     return {
-    //         title: 'test',
-    //         path: '/pages/index'
-    //     };
-    // }
 };
