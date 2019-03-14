@@ -9,7 +9,7 @@
                 <view v-for="item in list"
                      :key="item"
                      style="line-height: 50px">
-                    {{labelMap[item]}}“{{item}}”
+                    \{{labelMap[item]}}“\{{item}}”
                 </view>
             </picker-view-column>
         </picker-view>
